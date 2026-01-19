@@ -1,0 +1,16 @@
+# Maven
+target/
+
+# Environment files
+.env
+
+# Application config with secrets
+application.properties
+
+# Logs
+*.log
+
+# IDE files
+.idea
+.vscode
+*.iml
