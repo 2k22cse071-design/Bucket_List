@@ -23,7 +23,7 @@ Open a terminal in the `backend` folder:
 cd backend
 mvn spring-boot:run
 ```
-erver will start on `http://localhost:8080`.
+Server will start on `http://localhost:8080`.
 
 ### 2. Start the Frontend
 Open a new terminal in the `frontend` folder:
