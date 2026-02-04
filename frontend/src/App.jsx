@@ -101,48 +101,40 @@ function App() {
         </button>
       </header>
 
-      <div className="tabs">
-        <button
-          className={`tab ${activeTab === 'ACHIEVEMENT' ? 'active' : ''}`}
-          onClick={() => setActiveTab('ACHIEVEMENT')}
-        >
-          Achievements
-        </button>
-        <button
-          className={`tab ${activeTab === 'MISSED' ? 'active' : ''}`}
-          onClick={() => setActiveTab('MISSED')}
-        >
-          Missed Achievements
-        </button>
-        <button
-          className={`tab ${activeTab === 'BUCKETLIST' ? 'active' : ''}`}
-          onClick={() => setActiveTab('BUCKETLIST')}
-        >
-          Bucket List
-        </button>
-      </div>
-
       <div className="content-area">
-        {currentItems.length === 0 ? (
-          <div className="empty-state">No items found in this section.</div>
-        ) : (
-          <div className="grid">
-            {currentItems.map(item => (
-              <div key={item.id} className="card">
-                <div className="card-header">
-                  <h3>{item.title}</h3>
-                  <div className="card-actions">
-                    <button onClick={() => handleOpenModal(item)} className="icon-btn edit">✎</button>
-                    <button onClick={() => handleDelete(item.id)} className="icon-btn delete">🗑</button>
+        {['ACHIEVEMENT', 'MISSED', 'BUCKETLIST'].map(categoryGroup => {
+          const categoryItems = items.filter(item => item.category === categoryGroup);
+          if (categoryItems.length === 0) return null;
+
+          return (
+            <div key={categoryGroup} className="category-section">
+              <h2 className="category-title">
+                {categoryGroup === 'ACHIEVEMENT' && 'Achievements'}
+                {categoryGroup === 'MISSED' && 'Missed Achievements'}
+                {categoryGroup === 'BUCKETLIST' && 'Bucket List'}
+              </h2>
+              <div className="grid">
+                {categoryItems.map(item => (
+                  <div key={item.id} className="card">
+                    <div className="card-header">
+                      <h3>{item.title}</h3>
+                      <div className="card-actions">
+                        <button onClick={() => handleOpenModal(item)} className="icon-btn edit">✎</button>
+                        <button onClick={() => handleDelete(item.id)} className="icon-btn delete">🗑</button>
+                      </div>
+                    </div>
+                    {item.description && <p>{item.description}</p>}
+                    <span className={`badge ${item.category.toLowerCase()}`}>
+                      {item.category.replace('_', ' ')}
+                    </span>
                   </div>
-                </div>
-                <p>{item.description}</p>
-                <span className={`badge ${item.category.toLowerCase()}`}>
-                  {item.category.replace('_', ' ')}
-                </span>
+                ))}
               </div>
-            ))}
-          </div>
+            </div>
+          );
+        })}
+        {items.length === 0 && (
+          <div className="empty-state">No items found. Start by adding a new one!</div>
         )}
       </div>
 
