@@ -3,7 +3,7 @@
 A full-stack Todo/Achievement List application using Spring Boot and React.
 
 ## Prerequisites
-1.  **XAMPP**: Ensure MySQL is running on port 3306.
+1.  **MYSQL Workbench**: Ensure MySQL is running on port 3306.
 2.  **Java 17+**: For the backend.
 3.  **Node.js**: For the frontend.
 
